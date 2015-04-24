@@ -12,10 +12,13 @@ download composer for laravel at https://getcomposer.org/doc/00-intro.md#install
 
 2nd step 
 after installing the composer set up you can run this command to  install laravel
+
     composer global require "laravel/installer=~1.1"
 
 3rd step
-  run  this on the command line interface 
+  run  this on the command line interface .
+  
+  
       php artisan migrate
 
 Done..
