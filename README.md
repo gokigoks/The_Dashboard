@@ -16,11 +16,21 @@ after installing the composer set up you can run this command to  install larave
     composer global require "laravel/installer=~1.1"
 
 3rd step
-  run  this on the command line interface .
+configure database open config/database.php and change the database credentials
+    
+        'host'      => env('DB_HOST', 'localhost'),
+		'database'  => env('DB_DATABASE', 'forge'),
+		'username'  => env('DB_USERNAME', 'root'),
+		'password'  => env('DB_PASSWORD', 'eldrin123'),
+        
+
+
+4th step
+  run  this on the command line interface . make sure database is running
   
   
       php artisan migrate
 
-Done..
 
+DONE..
  
