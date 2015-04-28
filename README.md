@@ -26,9 +26,14 @@ configure database open config/database.php and change the database credentials
 
 
 4th step
+	
+	find the .ENV file. wala ge sulod ug folder. change the Database credentials. for more info chat me
+	
+	
   run  this on the command line interface . make sure database is running
   
-  
+5th step
+
       php artisan migrate
 
 
