@@ -1,0 +1,23 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#	modified:   app/Http/Middleware/RedirectIfNotAdmin.php
+#	modified:   resources/views/Article/article.blade.php
+#	modified:   resources/views/Article/createArticle.blade.php
+#	modified:   resources/views/Article/edit.blade.php
+#	modified:   resources/views/Article/show.blade.php
+#	modified:   resources/views/app.blade.php
+#	modified:   resources/views/footer.blade.php
+#
+# Untracked files:
+#	app/comments.php
+#	database/migrations/2015_04_29_111856_create_comments_table.php
+#	public/js/README
+#	public/js/emoticons js archive.zip
+#	public/js/index.html
+#	public/js/javascripts/
+#	public/js/stylesheets/
+#
+

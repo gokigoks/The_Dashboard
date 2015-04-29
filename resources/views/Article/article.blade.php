@@ -28,10 +28,16 @@
 				<br> posted by : {{ $article->name }}
 				<hr>
 				<br>
-					<div class="body">{{  $article->content  }}</div>
+					<div class="body">
+						<p style="font-size: 20px;">	{{  $article->content  }} </p>
+					</div>
 				<br>
 					<span class="glyphicon glyphicon-thumbs-up">
+
 					</span>
+				<span class="glyphicon glyphicon-thumbs-flag"></span>
+					 <hr>
+					<span><a href="">comments</a></span>
 				<hr>
 
 			</article>
@@ -40,6 +46,23 @@
 
 		@endforeach
 
-		
+			
+
+@endsection
+
+@section('js')
+		<script type="text/javascript" src="{{ asset('/js/javascripts/jquery.cssemoticons.js') }}"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			$('.body').emoticonize({
+				//delay: 800,
+				animate: false,
+				//exclude: 'pre, code, .no-emoticons'
+			});
+			
+		})
+
+		</script>
+
 
 @endsection
