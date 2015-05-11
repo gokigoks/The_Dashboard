@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use App\Post;
 
 class DatabaseSeeder extends Seeder {
 
@@ -10,11 +11,61 @@ class DatabaseSeeder extends Seeder {
 	 *
 	 * @return void
 	 */
+	
 	public function run()
 	{
 		Model::unguard();
 
-		// $this->call('UserTableSeeder');
+		 $this->call('PostsTableSeeder');
+	}
+
+}
+
+
+class PostsTableSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+			
+		//DB::table('posts');
+		$post = new Post();
+
+		$post->user_id = 1;
+		$post->content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
+
+		$post->save();
+	}
+
+}
+
+
+class UsersTableSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+			
+		//DB::table('posts');
+		$user = new User();
+		$user->name = "admin";
+		$user->email = "eldrin.paul@gmail.com";
+		$user->password-> = "asdasd";
+
+		$user->save();
 	}
 
 }

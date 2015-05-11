@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class comments extends Model {
+class Embed extends Model {
 
 	//
-
+	
 }

@@ -34,4 +34,20 @@ class Article extends Model {
 
 	}
 
+	/**
+	*
+	**
+	*@var this model has many comments
+	*/
+
+	
+	public function comments() {
+
+		return $this->hasMany('App\Comment');
+		
+	}
+
+
+	
 }
+

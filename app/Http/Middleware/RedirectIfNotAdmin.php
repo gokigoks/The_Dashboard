@@ -27,14 +27,11 @@ class RedirectIfNotAdmin {
 
 		if (!$this->auth->check()){
 
-			return new RedirectResponse(url('auth/login'));
+			return redirect('auth/login');
 
 		}
-		if( !$request->user()->is('admin'))
-		{
-				//return redirect('article');
-				return redirect('article');
-		}
+		
+		
 		return $next($request);
 	}
 

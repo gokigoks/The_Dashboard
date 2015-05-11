@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,6 +14,14 @@
 Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
+
+Route::post('home','UserController@storePost');
+
+Route::post('ajax/postcomment','UserController@storeComment');
+	
+Route::get('user/settings','UserController@settings');
+
+Route::post('user/settings','UserController@saveSettings');
 
 Route::resource('article','ArticleController');
 

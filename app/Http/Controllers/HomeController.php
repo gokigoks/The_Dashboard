@@ -1,4 +1,13 @@
 <?php namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+use DB;
+use App\Comment;
+use App\User;
+use App\Post;
+use Auth;
+use App\Http\Requests\createArticleRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 
 class HomeController extends Controller {
 
@@ -29,8 +38,30 @@ class HomeController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
-		return view('home');
+	{	
+
+		try{
+
+		
+		// $post = DB::table('posts')
+  //           ->join('users', 'posts.user_id', '=', 'users.id')
+  //           ->select('posts.id', 'posts.content', 
+  //           	'posts.created_at', 'users.name')
+  //           ->orderBy('posts.updated_at','DESC')
+  //           ->take(10)->get();
+
+		$id = Auth::user()->id;
+		$post = Post::IdDescending()->get();		
+
+         		
+		return view('user.dashboard',compact('post'));
+
+		}
+		catch(ModelNotFoundException $e){
+			
+		}
+		
+		
 	}
 
 }

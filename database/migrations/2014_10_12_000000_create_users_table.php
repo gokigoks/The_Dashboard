@@ -18,12 +18,17 @@ class CreateUsersTable extends Migration {
 			$table->string('name');
 			$table->string('email')->unique();
 			$table->string('password', 60);
+			$table->string('profile_pic')->default('profile_user.jpg');
+			$table->text('about')->default('');
 			$table->enum('role', 
-				array('mailer','scraper','admin','teamlead'))
-				->default('mailer');
+				array('user','moderator','admin'))
+				->default('user');
+			$table->text('interests')->nullable();
 			$table->rememberToken();
 			$table->timestamps();
+
 		});
+		
 	}
 
 	/**

@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="_token" content="{{ csrf_token() }}"/>
 	<title>The Dashboard</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
@@ -11,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('/js/stylesheets/jquery.cssemoticons.css') }}">
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-
+	
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -29,7 +30,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">The Dashboard</a>
+				<a class="navbar-brand" href="{{ url('/dashboard') }}">The Dashboard</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -64,7 +65,8 @@
 
 	</div>
 	<!-- Scripts -->
-
+	
+	
 	@include('footer')
 	
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -72,6 +74,13 @@
 
 	<script type="text/javascript">
 		$('#flash-overlay-modal').modal();
+		
+		$.ajaxSetup({
+		    headers: {
+		        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+		    }
+			});
+
 	</script>
 	@yield('js')
 </body>

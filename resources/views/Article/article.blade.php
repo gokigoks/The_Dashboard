@@ -37,12 +37,13 @@
 					</span>
 				<span class="glyphicon glyphicon-thumbs-flag"></span>
 					 <hr>
-					<span><a href="">comments</a></span>
+					
 				<hr>
 
 			</article>
 			<br> 
 
+			
 
 		@endforeach
 
@@ -51,6 +52,7 @@
 @endsection
 
 @section('js')
+
 		<script type="text/javascript" src="{{ asset('/js/javascripts/jquery.cssemoticons.js') }}"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
