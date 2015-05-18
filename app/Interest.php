@@ -6,7 +6,7 @@ class Interest extends Model {
 
 		// define table used
 
-	protected $table = 'permission';
+	protected $table = 'interests';
 
 	/*
 	*	Define relation with other model
@@ -18,5 +18,14 @@ class Interest extends Model {
 		$this->belongsToMany('App\User');
 	}
 
+	public function article(){
+
+		$this->belongsToMany('App\Article','article_interest');
+	}
+
+	// public function scopeTags(){
+
+	// 	return 
+	// }
 
 }

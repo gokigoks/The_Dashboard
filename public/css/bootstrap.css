@@ -1191,6 +1191,9 @@ h6,
   line-height: 1.1;
   color: inherit;
 }
+
+
+
 h1 small,
 h2 small,
 h3 small,
@@ -4185,6 +4188,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand > img {
   display: block;
+  height:60px;
+  margin-top: -20px;
+  position: relative!important;
 }
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,

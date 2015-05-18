@@ -42,7 +42,10 @@ class Comment extends Model {
 
 	}
 
+	public function scopeUserName($query)
+	{
 
+	}
 
 }
 	

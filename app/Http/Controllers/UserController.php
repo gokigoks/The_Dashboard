@@ -1,16 +1,23 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+
 use Illuminate\Support\Facades\Request;
+
 use App\Http\Controllers\Controller;
 use App\Comment;  
 use App\Post;
 use App\User;
+use App\Group;
 use Input;
 use Auth;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\CreateCommentRequest;
+use App\Http\Requests\MakeGroupRequest;
+
 use App\Http\Requests\UpdateUserSettings;
+
+
 
 
 class UserController extends Controller {
@@ -49,9 +56,9 @@ class UserController extends Controller {
 	public function settings(){
 
 		$user = Auth::user();
-		//$article = Article::findOrFail($user_id);
+		$groups = Group::where('user_id','=',Auth::user()->id);
 
-		return view('user.settings',compact('user'));
+		return view('user.settings',compact('user'))->with(compact('groups'));
 
 	}
 
@@ -59,6 +66,7 @@ class UserController extends Controller {
 	public function saveSettings(UpdateUserSettings $request){
 
 		$user = User::findOrFail(Auth::user()->id);
+		
 
 		if(Input::hasFile('image')){
 			
@@ -83,7 +91,7 @@ class UserController extends Controller {
 			
 		}
 		
-		flash()->overlay('Your profile is already updated', 'Changes saved');
+		
 
 		$user->save();
 
@@ -112,14 +120,12 @@ class UserController extends Controller {
 	{
 		
 		$post = new Post($request->all());
-		//dd($post);		
-		//Auth::user()->article()->save($article);
-		//dd($post);
 		$post->user()->associate(Auth::user());
-		//Auth::user()->posts()->save($post);
+		
 		$post->save();
 		flash()->overlay('You have posted something', 'Thank you for posting');
 		return redirect('home');
+
 	}
 
 
@@ -139,15 +145,24 @@ class UserController extends Controller {
 
 
 	/**
-	 * Display the specified resource.
+	 * Make a new group
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param  request
+	 * @return associate it with the creator
 	 */
+	public function makeGroup(MakeGroupRequest $request){
 
+		//$group_name = $request->input('group_name');
+		$group = new Group($request->all()); 
+		
+		//$group->creator->id
 
-	public function show($id)
-	{
+	}
+
+	public function flagPost()
+	{												
+									
+		
 		
 	}
 

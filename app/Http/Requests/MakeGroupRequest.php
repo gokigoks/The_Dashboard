@@ -1,15 +1,8 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use Illuminate\Contracts\Auth\Guard;	
-use Auth;						
-class CreatePostRequest extends Request {
 
-	protected $auth;
-
-	public function construct(Guard $auth){
-		$this->auth = $auth;
-	}
+class MakeGroupRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -17,16 +10,8 @@ class CreatePostRequest extends Request {
 	 * @return bool
 	 */
 	public function authorize()
-	{	
-		//if($this->auth->check())
-		if(Auth::check())	
-		{
-
-			return true;
-
-		}
-		
-		return false;
+	{
+		return true;
 	}
 
 	/**
@@ -37,7 +22,7 @@ class CreatePostRequest extends Request {
 	public function rules()
 	{
 		return [
-			'content' => 'required',
+			
 		];
 	}
 

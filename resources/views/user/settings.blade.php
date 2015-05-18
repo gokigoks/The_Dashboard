@@ -31,12 +31,12 @@
 				<!-- SIDEBAR MENU -->
 				<div class="profile-usermenu">
 					<ul class="nav">
-						<li class="active">
+						<li>
 							<a href="{{ url('home') }}">
 							<i class="glyphicon glyphicon-home"></i>
 							Overview </a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="#">
 							<i class="glyphicon glyphicon-user"></i>
 							Account Settings </a>
@@ -63,7 +63,9 @@
 	           		<div class="col-md-12">
 	           			<div class="panel panel-primary">
 	           				<div class="panel-heading">
-	           					<h4>Account Settings</h4>
+	           					@foreach($groups as $group)
+	           					<h4>Account Settings {{ $group }}</h4>
+	           					@endforeach
 	           				</div>
 	           				<div class="panel-body">
 	       						@if (count($errors) > 0)
@@ -109,6 +111,7 @@
 									        {!! Form::text('email', null, ['class' => 'form-control']) !!}
 									      </div>
 									    </div>
+
 										<div class="form-group">
 									      <label for="inputAbout" class="col-lg-2 control-label">about me</label>
 									      <div class="col-lg-10">
@@ -117,19 +120,91 @@
 									    </div>									    
 									   
 									   
-									   
+									   {!!  Form::submit('save changes',array('class'=>'btn btn-success col-md-4')) !!}
+	           				
+	           				{!! Form::close() !!}
 									  </fieldset>										           				
 	           				</div>
-	           				<div class="panel-footer">
+	           				
 	           					
-	           					{!!  Form::submit('save changes',array('class'=>'btn btn-success')) !!}
-	           				</div>
-	           				{!! Form::close() !!}
+	           					
+
 	           			</div>
 	           		</div>
+	           		<div class="col-md-12">
+	           			<div class="panel panel-primary">
+	           				<div class="panel-heading">
+	           					<h4>Add private group</h4>
+	           				</div>
+	           				<div class="panel-body">
+ 								<div class="form-group">
+	           					{!! Form::open([ 'url' => 'user/settings' ]) !!}
+	           					{!! Form::label('group' , 'group name:', ['class'=> 'col-lg-2 control-label']) !!}
+		           					<div class="col-lg-10">
+		           						{!! Form::text('name', null, ['class' => 'form-control', 'id' => 'groupname']) !!}
+		           					</div>
+	           					</div>			
+	           					
+	           				</div>
+	           				<div class="panel-footer">
+	           					{!! Form::submit('new group', ['class' => 'btn btn-success form-control', 'id' => 'addGroup' ]) !!}
+	           					{!! Form::close() !!}
 
+	           				</div>
+	           			</div>
+	           		</div>
 			</div> <!--end of profile content -->
+			<!--  modal  -->
+	           		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					    	<div class="modal-body">
+					    		Group has been succesfully made!
+					  		</div>
+					    </div>
+					  </div>
+					</div>
+					<!--  modal end  -->
 		</div>		
 		</div> <!--end of row profile-->
 	</div> <!--end of container-->
+@endsection
+@section('js')
+	<script type="text/javascript">
+		
+		$(document).on('click','#addGroup', function(e){
+			
+			e.preventDefault();
+			var name = $(this).closest('.panel').find('#groupname').val();
+			var interest = $(this).closest('.panel').find('#interest').val();
+			var element = this;
+			//console.log(interest);
+
+			var element = this;
+
+				$.ajax({
+
+					url: '../ajax/new_group',
+	                type: 'POST',
+
+					data: {  
+					   "_token": "{{ csrf_token() }}",
+						name : name,
+						interest : interest,
+					},
+	                	success : function(){
+	                										                		
+	                		///console.log('success');
+
+	                		$(element).closest('.panel').find('#groupname').val('');
+	                		$(element).closest('.panel').find('#interest').val('');
+	                		$('#myModal').modal('show');
+	                	}
+
+				});	
+
+		});
+
+
+	</script>
 @endsection

@@ -8,7 +8,7 @@
 				padding: 0;
 				width: 100%;
 				height: 100%;
-				color: #B0BEC5;
+				color: #2c3e50;
 				display: table;
 				font-weight: 100;
 				font-family: 'Lato';
@@ -20,7 +20,7 @@
 				vertical-align: middle;
 			}
 
-			.content {
+			.content {	
 				text-align: center;
 				display: inline-block;
 			}
@@ -30,18 +30,36 @@
 				margin-bottom: 40px;
 			}
 
+			body {
+			  /* Margin bottom by footer height */
+			 	
+			}
+			footer {
+			  position: absolute;
+			  bottom: 0;
+			  width: 100%;
+			  /* Set the fixed height of the footer here */
+			  height: 60px;
+			  background-color: #f5f5f5;
+
+			}
 
 
 		</style>
 	</head>
-	<body>
+	<body style="background-image: url({{ asset('img/background4.png') }});">
 		<div class="container">
 			<div class="content">
-				<div class="title">Error 404 page not found!</div>
+				<div class="title"><h3>Error 404</h3></div><h1>You look lost..</h1><h2>go back <a href="{{ url('/') }}">here</a></h2>
 			</div>
-			<div class="content">
-				@include('footer')
-			</div>
+			
+				<footer class="footer">
+					
+							<p class="text-center">built with <a href="http://laravel.com"><img src="{{ asset('img/laravel.png') }}" alt="laravel"></a> 
+							The Dashboard	 &copy;  2015 for technical support and inquiries at eldrin.paul@gmail.com</p>
+					
+				</footer>
+
 			
 			
 		</div>

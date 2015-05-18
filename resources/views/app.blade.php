@@ -30,12 +30,15 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ url('/dashboard') }}">The Dashboard</a>
+				<a class="navbar-brand" href="{{ url('/dashboard') }}"><img alt="Brand" style="height:60px;" src="{{ asset('img/dashboard_brand.jpg') }}"/></a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Home</a></li>
+					<li><a href="{{ url('/home') }}">Home</a></li>
+					<li><a href="{{ url('/article') }}">threads</a></li>
+					
+
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -69,19 +72,27 @@
 	
 	@include('footer')
 	
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script type="text/javascript" src="{{ asset('/js/bootstrap.js') }}"></script> 
-
+	
+	
+    <script type="text/javascript" src="{{ asset('/js/jquery-2.1.4.js') }}"></script> 
+	<script type="text/javascript" src="{{ asset('/js/bootstrap.js') }}"></script>
+	
+	
 	<script type="text/javascript">
+
+		
 		$('#flash-overlay-modal').modal();
+		
+
 		
 		$.ajaxSetup({
 		    headers: {
 		        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
 		    }
-			});
+		});
 
 	</script>
+
 	@yield('js')
 </body>
 </html>

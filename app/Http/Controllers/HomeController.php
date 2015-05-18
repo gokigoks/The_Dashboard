@@ -44,11 +44,11 @@ class HomeController extends Controller {
 
 		
 		// $post = DB::table('posts')
-  //           ->join('users', 'posts.user_id', '=', 'users.id')
-  //           ->select('posts.id', 'posts.content', 
-  //           	'posts.created_at', 'users.name')
-  //           ->orderBy('posts.updated_at','DESC')
-  //           ->take(10)->get();
+//           ->join('users', 'posts.user_id', '=', 'users.id')
+//           ->select('posts.id', 'posts.content', 
+//           	'posts.created_at', 'users.name')
+//           ->orderBy('posts.updated_at','DESC')
+//           ->take(10)->get();
 
 		$id = Auth::user()->id;
 		$post = Post::IdDescending()->get();		

@@ -18,6 +18,7 @@ class Article extends Model {
 	protected $fillable  = [
 	'title',
 	'content',
+	'interest',
 	'created_at'
 	];
 
@@ -47,6 +48,15 @@ class Article extends Model {
 		
 	}
 
+	public function interest(){
+
+		return $this->belongsToMany('App\Interest','article_interest');
+	}
+
+	public function scopeName($query,$name)
+	{	
+		return $query->whereName($name);
+	}
 
 	
 }

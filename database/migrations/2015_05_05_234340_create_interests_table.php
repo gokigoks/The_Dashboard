@@ -16,17 +16,28 @@ class CreateInterestsTable extends Migration {
 		{
 
 			$table->increments('id');
+			$table->string('name');
 			$table->timestamps();
 
 		});
 
-		Schema::create('user_interests', function(Blueprint $table)
+		Schema::create('user_interest', function(Blueprint $table)
 		{
 
-			$table->increments('id');
+			
 			$table->integer('user_id')->unsigned();
 			$table->integer('interest_id')->unsigned();
-			$table->timestamps();
+			
+
+				$table->foreign('user_id')
+					->references('id')
+					->on('users')
+					->onDelete('cascade');
+
+				$table->foreign('interest_id')
+					->references('id')
+					->on('interests')
+					->onDelete('cascade');
 
 		});		
 
@@ -34,12 +45,44 @@ class CreateInterestsTable extends Migration {
 		Schema::create('post_interest', function(Blueprint $table)
 		{
 
-			$table->increments('id');
+			
 			$table->integer('post_id')->unsigned();
 			$table->integer('interest_id')->unsigned();
-			$table->timestamps();
+			
+
+				$table->foreign('post_id')
+					->references('id')
+					->on('posts')
+					->onDelete('cascade');
+
+				$table->foreign('interest_id')
+					->references('id')
+					->on('interests')
+					->onDelete('cascade');
+		});
+
+		Schema::create('article_interest', function(Blueprint $table)
+		{
+
+			
+			$table->integer('article_id')->unsigned();
+			$table->integer('interest_id')->unsigned();
+			
+
+			$table->foreign('article_id')
+				->references('id')
+				->on('articles')
+				->onDelete('cascade');
+
+			$table->foreign('interest_id')
+				->references('id')
+				->on('interests')
+				->onDelete('cascade');
 
 		});
+
+
+
 	}
 
 	/**
@@ -49,7 +92,13 @@ class CreateInterestsTable extends Migration {
 	 */
 	public function down()
 	{
+		
+		Schema::drop('user_interest');
+		Schema::drop('post_interest');
+		Schema::drop('article_interest');
+
 		Schema::drop('interests');
-	}
+
+	}			
 
 }

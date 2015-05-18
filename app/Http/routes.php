@@ -17,7 +17,15 @@ Route::get('home', 'HomeController@index');
 
 Route::post('home','UserController@storePost');
 
+Route::get('group/{id}','GroupController@index');		
+	
 Route::post('ajax/postcomment','UserController@storeComment');
+
+Route::post('ajax/new_group','GroupController@create');
+
+Route::post('ajax/flag_post','UserController@flagPost');
+
+Route::post('ajax/makeArticleComment','ArticleController@makeComment');
 	
 Route::get('user/settings','UserController@settings');
 

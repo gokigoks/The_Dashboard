@@ -78,6 +78,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	*
 	*
 	*/
+	public function group(){
+
+		return $this->belongsToMany('App\Group');
+
+	}
 
 	public function posts(){
 		
@@ -85,6 +90,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	}
 //
+
+	public function invites(){
+
+		return $this->hasMany('App\Invitation');
+
+	}
+
+	public function isInvited($id){
+
+		//if($this->invite)
+
+		/*
+		* returns boolean
+		*/
+
+	}
+
+
+
+
 
 
 }

@@ -4,9 +4,13 @@
 use App\Http\Controllers\Controller;
 use DB;
 use App\Article;
+use App\Interest;
+use App\Comment;
 use Carbon\Carbon;
+use App\User;
 use Auth;
 use App\Http\Requests\createArticleRequest;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller {
 
@@ -23,28 +27,28 @@ class ArticleController extends Controller {
 
 	public function index()
 	{
-		// $article = Article::latest()->get();
 
-		// $article['user'] = Auth::user();
-
-		$article = DB::table('users')
+		$articles = DB::table('users')
             ->join('articles', 'users.id', '=', 'articles.user_id')
             ->select('articles.id', 'articles.title', 
-            	'articles.content', 'articles.updated_at', 'users.name')
+            	'articles.content', 'articles.updated_at', 'users.name', 'users.profile_pic')
             ->orderBy('articles.updated_at','DESC')
             ->paginate(3);
 		
-		return view('Article.article', compact('article'));
+		return view('Article.article', compact('articles'));
+
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new entry.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{	
-		return view('Article.createArticle');
+		$tags = Interest::lists('name','name');			
+
+		return view('Article.createArticle',compact('tags'));
 	}
 
 	/**
@@ -56,7 +60,17 @@ class ArticleController extends Controller {
 	{
 		$article = new Article($request->all());
 
+		$name = $request->input('interest');
+
+		$tag_id = DB::table('interests')
+			->select('interests.id')
+			->where('name','=',$name)->get();
+
+		$article->interest()->attach($tag_id);
+
 		Auth::user()->article()->save($article);
+
+
 
 		flash()->overlay('Your article has been created', 'Thank you for posting');
 		
@@ -69,12 +83,18 @@ class ArticleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(Article $article)
 	{
-		$article = Article::findOrFail($id);
+		//$article = Article::all();	
+		//dd($article);
+		//$article = Article::where('title', 'LIKE' ,'%food%')->get();
+		$article->posted_by = User::find($article->user_id)->name;
+		$comments = $article->comments()->get();
+		//dd($comments->toArray());
 
-		return view('Article.show',compact('article'));
 
+		
+		return view('Article.show',compact(['article' , 'comments']));
 	}
 
 	/**
@@ -83,10 +103,10 @@ class ArticleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Article $article)
 	{	
-		$article = Article::findOrFail($id);
-		return view('Article.edit', compact('article'));
+		$tags = Interest::lists('name','name');		
+		return view('Article.edit', compact(['article' , 'tags']));
 	}
 
 	/**
@@ -95,9 +115,9 @@ class ArticleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id , createArticleRequest $request)
+	public function update($article , createArticleRequest $request)
 	{	
-		$article = Article::findOrFail($id);
+		
 		$article->created_at = Carbon::now();
 		$article->update($request->all());
 
@@ -117,4 +137,27 @@ class ArticleController extends Controller {
 		//
 	}
 
+	public function threads(){
+
+		//return
+
+	}
+
+	public function makeComment(Request $request){
+	
+
+		$comment = new Comment();
+		$comment->content = $request->input('content');
+		$article_id = $request->input('article_id');
+
+		$article = Article::findOrFail($article_id);
+
+		$comment->user()->associate(Auth::user());
+		$comment->article()->associate($article);
+
+		$comment->save();
+
+
+	}
 }
+	

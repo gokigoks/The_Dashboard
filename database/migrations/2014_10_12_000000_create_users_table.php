@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration {
 			$table->string('email')->unique();
 			$table->string('password', 60);
 			$table->string('profile_pic')->default('profile_user.jpg');
-			$table->text('about')->default('');
+			$table->text('about')->nullable();
 			$table->enum('role', 
 				array('user','moderator','admin'))
 				->default('user');

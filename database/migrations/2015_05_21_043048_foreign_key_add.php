@@ -31,6 +31,8 @@ class ForeignKeyAdd extends Migration {
 
 
 		});
+
+		
 	}
 
 	/**
@@ -40,7 +42,7 @@ class ForeignKeyAdd extends Migration {
 	 */
 	public function down()
 	{
-		//Schema::drop('comments');
+		
 	}
 
 }

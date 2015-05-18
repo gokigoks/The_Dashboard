@@ -76,21 +76,25 @@ use App\Post;
 	           					<small>Post something..</small>
 	           				</div>
 	           				<div class="panel-body">
-	           					{!!  Form::open([ 'url' => 'home' ])  !!}
+	           					
+	           					<form action="" method="post">
 	           					
 	           						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	           						
-	           						{!! Form::textarea('content', null, ['class' => 'form-control', 'rows'=>3]) !!}
+	           						
+	           						<textarea class="form-control" rows="3" name="content">
+
+	           						</textarea>
 	           							<div class="clearfix"></div>	           					
 	           					
-	           				</div>
-
-		           						<div class="panel-footer">
+	           				
+	           							<br>
+		           						
 		           							<button class="btn btn-primary" id="postbtn" type="submit">
 		           							post 
 		           							</button>
-		           						</div>
-		           				{!!  Form::close() !!}
+		           					</form>		
+		           			</div>	
 	           			</div>
 	           		</div>
 	           		
@@ -111,7 +115,8 @@ use App\Post;
 		           					post by : {{ $posts->user->name }}
 		           					<div class="clearfix"></div>
 		           					posted on: {{{ Carbon::createFromTimeStamp(strtotime($posts->created_at))->diffForHumans() }}}
-
+		           					<div class="clearfix"></div>
+		           					<p><i class="glyphicon glyphicon-thumbs-up"></i></p>
 		           					<hr>
 	           						
 
@@ -131,7 +136,7 @@ use App\Post;
 					@foreach($posts->comments as $comment)
 					<blockquote>
 				    	<h6> 
-							<img src="{{ asset('img/user.png') }}" class="media-object pull-left">
+							<img src="{{ asset('img/d2.jpg') }}" class="media-object pull-left">
 				    		{{ $comment->content }}				
 				    	</h6>
 						<small>{{ $comment->user->name  }}</small>
@@ -228,6 +233,7 @@ use App\Post;
 				var content = $(this).closest('.input-group').children('#comment_content').val();
 				
 				var post_id = $(this).closest('.input-group').children('#post_id').val();
+				
 				var element = this;
 
 				console.log(post_id);
@@ -248,7 +254,7 @@ use App\Post;
 							**
 							*/
 							
-	                		$(element).closest('.panel').children('.panel-body').append('<blockquote><h6> <img src="{{ asset('img/user.png') }}" class="media-object pull-left">'+ content +'</h6><small>{{ Auth::user()->name }}</small></blockquote>');
+	                		$(element).closest('.panel').children('.panel-body').append('<blockquote><h6> <img src="{{asset('img/'.Auth::user()->profile_pic)}}" class="media-object pull-left">'+ content +'</h6><small>{{ Auth::user()->name }}</small></blockquote>');
 	                		
 	                		$(element).closest('.input-group').children('#comment_content').val('');
 
@@ -258,7 +264,7 @@ use App\Post;
 
 				});
 
-			});
+			});///
 
 			
 
